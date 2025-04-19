@@ -4,8 +4,6 @@ import { COLORS } from '../colors'
 export const styles = StyleSheet.create({
     inputContainer: {
         padding: 16,
-        width: 400,
-        height:80,
     },
     label: {
         fontSize: 16,
@@ -22,19 +20,14 @@ export const styles = StyleSheet.create({
     leftIcon: {
         position: 'absolute',
         left: 16,
-        width: 36,
-        height: 36,
         zIndex: 2,
     },
     rightIcon: {
         position: 'absolute',
-        right: 16,
-        width: 25,
-        height: 25,
+        right: 35,
         zIndex: 2,
     },
     input: {
-        flex: 1,
         width: 349,
         height: 60,
         borderWidth: 1,

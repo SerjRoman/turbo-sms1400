@@ -3,47 +3,30 @@ import { styles } from "./input.style"
 import { IInputProps } from "./input.types"
 
 export function Input(props: IInputProps) {
-    const { label, leftIcon, error, placeholder, rightIcon, errorIcon } = props
+    const { label, leftIcon, error, rightIcon, errorIcon, style, ...otherProps } = props
 
     return (
         <View style={styles.inputContainer}>
 
             {label && <Text style={styles.label}>{label}</Text>}
 
-            <View style={styles.inputWrapper}>
-                {leftIcon && (
-                    <Image 
-                        source={{ uri: leftIcon }} 
-                        style={styles.leftIcon} 
-                    />
-                )}
-
+            <View style={styles.inputWrapper} >
+                {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
                 <TextInput
                     style={[
                         styles.input,
-                        leftIcon && styles.inputWithLeftIcon,
-                        rightIcon && styles.inputWithRightIcon,
+                        leftIcon ? styles.inputWithLeftIcon : undefined,
+                        rightIcon ? styles.inputWithRightIcon : undefined,
+                        style
                     ]}
-                    placeholder={placeholder}
-                    {...props}
+                    {...otherProps}
                 />
-
-                {rightIcon && (
-                    <Image 
-                        source={{ uri: rightIcon }} 
-                        style={styles.rightIcon} 
-                    />
-                )}
+                {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
             </View>
 
             <View style={styles.inputWrapper}>
 
-                {errorIcon && (
-                    <Image 
-                        source={{ uri: errorIcon }} 
-                        style={styles.errorIcon} 
-                    />
-                )}
+                {errorIcon && <View style={styles.errorIcon}>{errorIcon}</View>}
 
                 <Text style={styles.errorText}>
                     {error}

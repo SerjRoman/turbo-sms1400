@@ -1,6 +1,7 @@
 import { TouchableOpacity, Text } from "react-native";
 import { IButtonProps } from "./button.types";
 import { styles } from "./button.styles"
+import React from "react";
 
 // <Button label></Button>
 export function Button(props: IButtonProps){

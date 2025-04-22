@@ -3,7 +3,7 @@ import { ILogin } from "../../types"
 import { View } from "react-native"
 import { Input } from "../../../../shared/ui/input"
 import { Button } from "../../../../shared/ui/button"
-import { KeyIcon, UserIcon } from "../../../../shared/ui/icons"
+import { EyeIcon, UserIcon } from "../../../../shared/ui/icons"
 
 export function LoginForm(){
     // Берез control и handleSubmit с useForm
@@ -30,7 +30,7 @@ export function LoginForm(){
                         return(
                             <Input value={field.value} 
                             onChange={field.onChange} 
-                            placeholder="SuperCoolEmail@gmail.com" 
+                            placeholder="Email" 
                             label="email" 
                             leftIcon={<UserIcon width={36} height={35}/>}/>
                         )
@@ -42,16 +42,28 @@ export function LoginForm(){
                         return(
                             <Input value={field.value} 
                             onChange={field.onChange} 
-                            placeholder="password" 
-                            label="password" 
-                            leftIcon={<KeyIcon width={36} height={35}/>}/>
+                            placeholder="Password" 
+                            label="Password" 
+                            leftIcon={<EyeIcon width={36} height={35}/>}/>
+                        )
+                    }
+                }>
+                </Controller>
+                <Controller control={control} name='password' render={
+                    ({ field, fieldState })=>{
+                        return(
+                            <Input value={field.value} 
+                            onChange={field.onChange} 
+                            placeholder="Repeat password" 
+                            label="Repeat password" 
+                            leftIcon={<EyeIcon width={36} height={35}/>}/>
                         )
                     }
                 }>
                 </Controller>
             </View>
             <View>
-                <Button onPress={handleSubmit(onSubmit)} label="Submit"/>
+                <Button onPress={handleSubmit(onSubmit)} label="Send"/>
             </View>
         </View>
     )

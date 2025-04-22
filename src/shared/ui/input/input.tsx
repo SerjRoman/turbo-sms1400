@@ -7,11 +7,9 @@ export function Input(props: IInputProps) {
 
     return (
         <View style={styles.inputContainer}>
-
             {label && <Text style={styles.label}>{label}</Text>}
-
             <View style={styles.inputWrapper} >
-                {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
+                {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
                 <TextInput
                     style={[
                         styles.input,
@@ -21,18 +19,8 @@ export function Input(props: IInputProps) {
                     ]}
                     {...otherProps}
                 />
-                {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
+                {rightIcon && <View style={styles.iconRight}>{rightIcon}</View>}
             </View>
-
-            <View style={styles.inputWrapper}>
-
-                {errorIcon && <View style={styles.errorIcon}>{errorIcon}</View>}
-
-                <Text style={styles.errorText}>
-                    {error}
-                </Text>
-            </View>
-
         </View>
     );
 }

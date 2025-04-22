@@ -17,12 +17,12 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    leftIcon: {
+    iconLeft: {
         position: 'absolute',
         left: 16,
         zIndex: 2,
     },
-    rightIcon: {
+    iconRight: {
         position: 'absolute',
         right: 35,
         zIndex: 2,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         width: 349,
         height: 60,
         borderWidth: 1,
-        borderColor: COLORS.bisquePrimary,
+        borderColor: COLORS.pinkPrimary,
         borderRadius: 16,
         fontSize: 16,
         backgroundColor: COLORS.bisquePrimary,
@@ -41,19 +41,5 @@ export const styles = StyleSheet.create({
     },
     inputWithRightIcon: {
         paddingRight: 60, 
-    },
-    errorText: {
-        color: COLORS.red,
-        fontSize: 14,
-        flexShrink: 1,
-        paddingLeft: 24,
-        fontWeight: '500',
-    },
-    errorIcon: {
-        position: 'absolute',
-        left: 10,
-        width: 15,
-        height: 15,
-        zIndex: 2,
     },
 });

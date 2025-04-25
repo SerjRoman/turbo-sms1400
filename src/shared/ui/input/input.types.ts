@@ -8,5 +8,6 @@ export interface IInputProps extends TextInputProps {
     leftIcon?: ReactNode,
     error?: string,
     value?: string,
-    errorIcon?: ReactNode,
 }
+
+export interface IInputPasswordProps extends Omit<IInputProps, "rightIcon" | "leftIcon"> {}

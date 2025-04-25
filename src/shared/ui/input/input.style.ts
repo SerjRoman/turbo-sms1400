@@ -4,6 +4,7 @@ import { COLORS } from '../colors'
 export const styles = StyleSheet.create({
     inputContainer: {
         padding: 16,
+        
     },
     label: {
         fontSize: 16,
@@ -16,13 +17,14 @@ export const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
+        
     },
-    iconLeft: {
+    leftIcon: {
         position: 'absolute',
         left: 16,
         zIndex: 2,
     },
-    iconRight: {
+    rightIcon: {
         position: 'absolute',
         right: 35,
         zIndex: 2,
@@ -31,7 +33,7 @@ export const styles = StyleSheet.create({
         width: 349,
         height: 60,
         borderWidth: 1,
-        borderColor: COLORS.pinkPrimary,
+        borderColor: COLORS.black,
         borderRadius: 16,
         fontSize: 16,
         backgroundColor: COLORS.bisquePrimary,
@@ -42,4 +44,15 @@ export const styles = StyleSheet.create({
     inputWithRightIcon: {
         paddingRight: 60, 
     },
+    errorText: {
+        color: COLORS.red,
+        fontSize: 14,
+        flexShrink: 1,
+        fontWeight: '500',
+    },
+    errorBlock:{
+        gap: 2,
+        flexDirection:"row",
+
+    }
 });

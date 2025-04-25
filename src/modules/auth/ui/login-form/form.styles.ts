@@ -3,6 +3,9 @@ import { COLORS } from '../../../../shared/ui/colors'
 
 
 export const styles = StyleSheet.create({
+    container: {
+        flex: 2
+    },
     inputBox: {
         height: 60,
         alignItems: "center",
@@ -10,4 +13,7 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         backgroundColor: COLORS.bisqueSecondary,
     },
+    buttonForm: {
+        alignItems: "center"
+    }
 })

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.bisquePrimary,
+        backgroundColor: COLORS.bisqueSecondary,
     },
     disabled: {
         borderWidth: 2,

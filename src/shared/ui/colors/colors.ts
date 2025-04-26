@@ -7,4 +7,5 @@ export const COLORS = {
     red: "#F6454E",
     error: "#FF0000",
     pinkPrimary: '#733349',
+    brownPrimary: "#733349"
 }

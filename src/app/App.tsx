@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { Providers } from './providers';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LoginForm, WelcomeBlock } from '../modules/auth/ui';
+import { LoginForm, RegisterForm, WelcomeBlock } from '../modules/auth/ui';
 
 
 export default function App() {
     return (
         <Providers>
-            <SafeAreaView {/* тут чего то не хватает */}> 
+            <SafeAreaView style={{flex: 1}}> 
                 <StatusBar style="auto" />
                 <WelcomeBlock/>
-                <LoginForm/>
+                <RegisterForm/>
             </SafeAreaView>
         </Providers>
 );

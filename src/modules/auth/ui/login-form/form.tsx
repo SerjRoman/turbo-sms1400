@@ -5,6 +5,7 @@ import { Input } from "../../../../shared/ui/input"
 import { Button } from "../../../../shared/ui/button"
 import { UserIcon } from "../../../../shared/ui/icons"
 import { styles } from "./form.styles"
+import React from "react"
 
 export function LoginForm(){
     // Берез control и handleSubmit с useForm

@@ -6,11 +6,11 @@ import { Text } from 'react-native'
 
 export default function Login() {
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'space-around',}}>
             <StatusBar style="auto" />
             <WelcomeBlock/>
             <LoginForm/>
-            <Text>Don’t have an account? <Link href={'/register'}>Register now</Link></Text>
+            <Text>Don’t have an account? <Link style={{color: '#733349', flex: 0.5,}} href={'/register'}>Register now</Link></Text>
         </SafeAreaView>
     )
 }

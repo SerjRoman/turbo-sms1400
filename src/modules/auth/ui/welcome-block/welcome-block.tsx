@@ -5,8 +5,8 @@ import { styles } from "./welcome-block.styles";
 export function WelcomeBlock(){
     return (
         <View style={styles.container}>
-            <LogoImage/>
-            <Text>Welcome to TurboSMS</Text>
+            <LogoImage style={styles.image}/>
+            <Text style={styles.title}>Welcome to TurboSMS</Text>
         </View>
     )
 }

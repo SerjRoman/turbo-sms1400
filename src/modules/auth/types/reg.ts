@@ -4,3 +4,8 @@ export interface IReg {
     password: string
     confirmPassword: string
 }
+
+export interface IRegAbout {
+    username: string
+    surname: string
+}

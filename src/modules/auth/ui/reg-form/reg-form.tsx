@@ -1,27 +1,28 @@
 import { View, Text } from "react-native";
-import { WelcomeBlock } from "../welcome-block";
 import { Input } from "../../../../shared/ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { IReg } from "../../types/reg";
-import { EyeIcon, KeyIcon, UserIcon } from "../../../../shared/ui/icons";
-import React from "react";
+import { UserIcon } from "../../../../shared/ui/icons";
 import EmailIcon from "../../../../shared/ui/icons/email-icon";
 import { Button } from "../../../../shared/ui/button";
 import { styles } from "./reg-form.styles";
-import { COLORS } from "../../../../shared/ui/colors";
+import React from "react";
+import { Link, useRouter } from "expo-router";
 
 export function RegPage(){
 
     const { control, handleSubmit } = useForm<IReg>()
+    const router = useRouter();
 
     function onSubmit(data: IReg){
-        console.log(data)
+        router.push("/register-about")
+
     }
 
     return (
         <View>
             <View style={styles.container}>
-                <WelcomeBlock/>
+
                 <View>
                     <Controller
                     control={control}
@@ -40,6 +41,7 @@ export function RegPage(){
                             onChange={field.onChange} 
                             placeholder="SuperCoolEmail@gmail.com"
                             label="Email"
+                            onChangeText={field.onChange}
                             error={fieldState.error?.message}
                             leftIcon={<EmailIcon width={36} height={35}/>}
                             />
@@ -63,6 +65,7 @@ export function RegPage(){
                             onChange={field.onChange} 
                             placeholder="SuperCoolUsername"
                             label="Username"
+                            onChangeText={field.onChange}
                             error={fieldState.error?.message}
                             leftIcon={<UserIcon width={36} height={35}/>}
                             />
@@ -92,6 +95,7 @@ export function RegPage(){
                             <Input.Password
                             value={field.value} 
                             onChange={field.onChange} 
+                            onChangeText={field.onChange}
                             placeholder="Your password"
                             label="Password"
                             error={fieldState.error?.message}
@@ -122,6 +126,7 @@ export function RegPage(){
                             <Input.Password 
                             value={field.value} 
                             onChange={field.onChange} 
+                            onChangeText={field.onChange}
                             placeholder="Your password"
                             label="Re-type password"
                             error={fieldState.error?.message}
@@ -129,13 +134,11 @@ export function RegPage(){
                         )
                     }}/>
                 </View>
+
                 <View>
                     <Button onPress={handleSubmit(onSubmit)} label="Continue..." />
                 </View>
-                <View style={{flexDirection:"row", gap:5, marginTop:30}}>
-                    <Text>Already have an account?</Text>
-                    <Text style={{color:COLORS.brownPrimary}}>Login now</Text>
-                </View>
+
             </View>
         </View>
     )

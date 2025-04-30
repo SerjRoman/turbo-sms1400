@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Path, SvgProps } from "react-native-svg"
 
-function EmailIcon(props: SvgProps) {
+export function EmailIcon(props: SvgProps) {
   return (
     <Svg
       viewBox="0 0 35 28"

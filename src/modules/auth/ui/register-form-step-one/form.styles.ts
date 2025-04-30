@@ -4,7 +4,7 @@ import { COLORS } from '../../../../shared/ui/colors'
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
     },
 })

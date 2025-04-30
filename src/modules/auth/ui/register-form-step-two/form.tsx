@@ -1,22 +1,31 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { UserIcon } from "../../../../shared/ui/icons";
 import { Controller, useForm } from "react-hook-form";
-import { IRegAbout } from "../../types/reg";
+import { IRegisterStepTwo } from "../../types/reg";
 import { Input } from "../../../../shared/ui/input";
 import { Button } from "../../../../shared/ui/button";
-import SearchIcon from "../../../../shared/ui/icons/search-icon";
 import { COLORS } from "../../../../shared/ui/colors";
-import {launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker'
+import { launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker'
 import { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
 
 const defaultImage = require("../../../../../assets/boy.png");
 
-export function RegAbout() {
-    const { control, handleSubmit } = useForm<IRegAbout>()
-    const [image, setImage] = useState<string>("")
+// token, user, setToken, setUser - context
+// useAuth() {
 
-    function onSubmit(data: IRegAbout) {
-        console.log(data);
+//     return {login, register}
+// }
+
+export function RegisterFormStepTwo() {
+    const { control, handleSubmit } = useForm<IRegisterStepTwo>()
+    const [image, setImage] = useState<string>("")
+    // useLocalSearchParams - хук який витягує всі параметри, як динамічні так і query параметри
+    const params = useLocalSearchParams<{username: string, email: string, password: string}>()
+
+    function onSubmit(data: IRegisterStepTwo) {
+        console.log(data)
+        console.log(params)
     }
 
     async function onSearch() {
@@ -34,7 +43,6 @@ export function RegAbout() {
                 setImage(images.assets[0].uri)
             }
         } else {
-            alert("Error`(*>﹏<*)′");
         }
     }
 
@@ -47,21 +55,22 @@ export function RegAbout() {
 
             <Controller
                 control={control}
-                name="username"
+                name="name"
                 rules={{
                     required: {
                         value: true,
-                        message: "Username is required",
+                        message: "Name is required",
                     },
                     minLength: {
                         value: 3,
-                        message: "Username must be at least 3 characters long",
+                        message: "Name must be at least 3 characters long",
                     },
                 }}
                 render={({ field, fieldState }) => {
                     return (
                         <Input
                             value={field.value}
+                            onChangeText={field.onChange}
                             onChange={field.onChange}
                             placeholder="Name"
                             error={fieldState.error?.message}
@@ -88,6 +97,7 @@ export function RegAbout() {
                         <Input
                             value={field.value}
                             onChange={field.onChange}
+                            onChangeText={field.onChange}
                             placeholder="Surname"
                             error={fieldState.error?.message}
                         />

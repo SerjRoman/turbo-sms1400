@@ -1,8 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LoginForm, WelcomeBlock } from "../../modules/auth/ui";
-import { Link } from 'expo-router';
-import { Text } from 'react-native'
+import { FooterBlock, LoginForm, WelcomeBlock } from "../../modules/auth/ui";
 
 export default function Login() {
     return (
@@ -10,7 +8,10 @@ export default function Login() {
             <StatusBar style="auto" />
             <WelcomeBlock/>
             <LoginForm/>
-            <Text>Don’t have an account? <Link href={'/register'}>Register now</Link></Text>
+            <FooterBlock 
+                text={"Don’t have an account?"} 
+                linkHref={"/register/step-one"}
+                linkText={"Register now"}/>
         </SafeAreaView>
     )
 }

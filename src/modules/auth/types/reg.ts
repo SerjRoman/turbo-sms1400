@@ -1,11 +1,11 @@
-export interface IReg {
+export interface IRegisterStepOne {
     email: string
     username: string
     password: string
     confirmPassword: string
 }
 
-export interface IRegAbout {
-    username: string
+export interface IRegisterStepTwo {
+    name: string
     surname: string
 }

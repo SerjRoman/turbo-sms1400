@@ -10,7 +10,7 @@ export default function Login() {
             <StatusBar style="auto" />
             <WelcomeBlock/>
             <LoginForm/>
-            <Text>Don’t have an account? <Link href={'/register'}>Register now</Link></Text>
+            <Text>Don’t have an account? <Link href={'/register-form-step-one'}>Register now</Link></Text>
         </SafeAreaView>
     )
 }

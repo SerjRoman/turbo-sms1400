@@ -1,10 +1,11 @@
 import { Controller, useForm } from "react-hook-form"
 import { IRegister } from "../../../types"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import { Input } from "../../../../../shared/ui/input"
 import { Button } from "../../../../../shared/ui/button"
-import { UserIcon } from "../../../../../shared/ui/icons"
+import { UserIcon, LoupeIcon } from "../../../../../shared/ui/icons"
 import { styles } from "./form.styles"
+import { UploadImage } from "../../../../../shared/ui/images/";
 
 export function RegisterFormStepTwo(){
 
@@ -16,6 +17,10 @@ export function RegisterFormStepTwo(){
 
     return(
         <View style={styles.container}>
+            <View style={styles.personalInfoText}>
+                <Text style={{fontSize: 30}}><UserIcon width={36} height={35}/>Personal Info</Text>
+            </View>
+            
             <View>
                 <Controller
                 control={control}
@@ -32,7 +37,6 @@ export function RegisterFormStepTwo(){
                             value={field.value} 
                             onChange={field.onChange} 
                             placeholder="Your name" 
-                            label="Name" 
                             error={fieldState.error?.message}/>
                         )
                     }
@@ -53,11 +57,18 @@ export function RegisterFormStepTwo(){
                             value={field.value} 
                             onChange={field.onChange} 
                             placeholder="Your surname" 
-                            label="Surname" 
                             error={fieldState.error?.message}/>
                         )
                     }
                 }/>
+            </View>
+            
+            <View style={styles.photoUpload}>
+                <View style={styles.photoUploadObject}>
+                    <UploadImage style={styles.uploadImage} />
+                    <LoupeIcon style={styles.loupeIcon} />
+                </View>
+                <Text>Upload photo</Text>
             </View>
 
             <View style={styles.buttonForm}>

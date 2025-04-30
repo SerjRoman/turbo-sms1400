@@ -1,4 +1,4 @@
-import Providers from "./providers";
+import { Providers } from "./providers";
 import { Stack } from "expo-router";
 
 export default function RootLayout(){

@@ -5,7 +5,7 @@ import { Input } from "../../../../../shared/ui/input"
 import { Button } from "../../../../../shared/ui/button"
 import { UserIcon } from "../../../../../shared/ui/icons"
 import { styles } from "./form.styles"
-import { Redirect } from "expo-router";
+import { useRouter  } from "expo-router";
 
 export function RegisterFormStepOne(){
     // Берез control и handleSubmit с useForm
@@ -13,11 +13,12 @@ export function RegisterFormStepOne(){
     // handleSubmit - Функция которая сработает при отправки формы
     const { control, handleSubmit } = useForm<IRegister>()
 
+    const router = useRouter();
+
     // Функция которая будет что-то делать при отправке формы
     function onSubmit(data: IRegister){
-        return (
-            <Redirect href={"ui/register/register-form-step-two"}></Redirect>
-        )
+        console.log("ierjoernf")
+        router.push("/register-form-step-two")
     }
 
     return(
@@ -116,7 +117,7 @@ export function RegisterFormStepOne(){
             </View>
 
             <View style={styles.buttonForm}>
-                <Button onPress={handleSubmit(onSubmit)} label="Continue..."/>
+                <Button onPress={()=>{router.push("/register-form-step-two")}} label="Continue..."/>
             </View>
 
         </View>

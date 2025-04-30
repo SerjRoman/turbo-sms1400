@@ -14,5 +14,32 @@ export const styles = StyleSheet.create({
     },
     buttonForm: {
         alignItems: "center"
-    }
+    }, 
+    personalInfoText: {
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    photoUpload: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 15
+    },
+    photoUploadObject: {
+        width: 100,
+        height: 100,
+        position: 'relative',
+    },
+    uploadImage: {
+        width: 100,
+        height: 100,
+        borderRadius: 25,
+        opacity: 0.5,
+    },
+    loupeIcon: {
+        position: 'absolute',
+        width: 50,
+        height: 50,
+        top: '25%',
+        left: '25%',
+    },
 })

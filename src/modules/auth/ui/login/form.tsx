@@ -47,28 +47,6 @@ export function LoginForm(){
                     }
                 }/>
 
-                <Controller 
-                control={control} 
-                name='username'
-                rules={{
-                    required:{
-                        value:true,
-                        message:"Username is required"
-                }}}
-                render={
-                    ({ field, fieldState })=>{
-                        return(
-                            <Input 
-                            value={field.value} 
-                            onChange={field.onChange} 
-                            placeholder="SuperCoolUsername" 
-                            label="Username" 
-                            error={fieldState.error?.message}
-                            leftIcon={<UserIcon width={36} height={35}/>}/>
-                        )
-                    }
-                }/>
-
                 <Controller control={control} name='password'
                 rules={{
                     required:{
@@ -82,25 +60,6 @@ export function LoginForm(){
                             onChange={field.onChange} 
                             placeholder="Password" 
                             label="Password" 
-                            error={fieldState.error?.message}
-                            />
-                        )
-                    }
-                }/>
-
-            <Controller control={control} name='password'
-                rules={{
-                    required:{
-                        value:true,
-                        message:"Password is required"
-                }}}
-                render={
-                    ({ field, fieldState })=>{
-                        return(
-                            <Input.Password value={field.value} 
-                            onChange={field.onChange} 
-                            placeholder="Re-type Password" 
-                            label="Re-type Password" 
                             error={fieldState.error?.message}
                             />
                         )

@@ -1,2 +1,4 @@
 export { WelcomeBlock } from './welcome-block'
-export { LoginForm } from './login-form'
+export { RegisterFormStepOne } from './register/register-form-step-one'
+export { RegisterFormStepTwo } from './register/register-form-step-two'
+export { LoginForm } from './login'

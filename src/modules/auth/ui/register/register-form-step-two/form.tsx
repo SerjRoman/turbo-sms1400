@@ -5,7 +5,6 @@ import { Input } from "../../../../../shared/ui/input"
 import { Button } from "../../../../../shared/ui/button"
 import { UserIcon, LoupeIcon } from "../../../../../shared/ui/icons"
 import { styles } from "./form.styles"
-import { UploadImage } from "../../../../../shared/ui/images/";
 import {launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker'
 import { useState } from "react"
 

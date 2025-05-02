@@ -5,7 +5,7 @@ import { Input } from "../../../../../shared/ui/input"
 import { Button } from "../../../../../shared/ui/button"
 import { UserIcon } from "../../../../../shared/ui/icons"
 import { styles } from "./form.styles"
-import { useRouter  } from "expo-router";
+import { useLocalSearchParams, useRouter  } from "expo-router";
 
 export function RegisterFormStepOne(){
     // Берез control и handleSubmit с useForm
@@ -15,8 +15,12 @@ export function RegisterFormStepOne(){
 
     const router = useRouter();
 
+    // useLocalSearchParams - хук який витягує всі параметри, як динамічні так і query параметри
+    const params = useLocalSearchParams<{username: string, email: string, password: string}>()
+
     // Функция которая будет что-то делать при отправке формы
-    function onSubmit(data: IRegister){
+    function onSubmit(data: IRegister){ // Из-за IRegister в будущем могут быть проблемы, посмотрим. 
+        console.log(params)
         router.push("/register-form-step-two")
     }
 

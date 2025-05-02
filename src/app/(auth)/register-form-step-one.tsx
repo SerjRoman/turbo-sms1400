@@ -1,9 +1,7 @@
-import { Link } from 'expo-router'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { RegisterFormStepOne, RegisterFormStepTwo, WelcomeBlock } from "../../modules/auth/ui";
+import { RegisterFormStepOne, RegisterFormStepTwo, WelcomeBlock, FooterBlock } from "../../modules/auth/ui";
 import { StyleSheet } from 'react-native'
-import { COLORS } from '../../shared/ui/colors'
 
 export default function RegisterStepOne(){
     return (
@@ -11,7 +9,7 @@ export default function RegisterStepOne(){
             <WelcomeBlock></WelcomeBlock>
             <RegisterFormStepOne></RegisterFormStepOne>
             <View style={styles.textAlreadyHaveAccount}>
-                <Text>Already have account? <Link href={'/login'} style={styles.linkAlreadyHaveAccount}>Login now</Link></Text>
+                <FooterBlock text={"Already have an account?"} linkHref='/login' linkText='Login now' />
             </View>
         </SafeAreaView>
     )
@@ -22,9 +20,5 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 30
-    },
-    linkAlreadyHaveAccount: {
-        color: COLORS.pinkPrimary,
-        fontWeight: 'bold'
     }
 })

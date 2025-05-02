@@ -17,7 +17,6 @@ export function RegisterFormStepOne(){
 
     // Функция которая будет что-то делать при отправке формы
     function onSubmit(data: IRegister){
-        console.log("ierjoernf")
         router.push("/register-form-step-two")
     }
 
@@ -43,6 +42,7 @@ export function RegisterFormStepOne(){
                             <Input 
                             value={field.value} 
                             onChange={field.onChange} 
+                            onChangeText={field.onChange}
                             placeholder="SuperCoolEmail@gmail.com" 
                             label="Email" 
                             error={fieldState.error?.message}
@@ -65,6 +65,7 @@ export function RegisterFormStepOne(){
                             <Input 
                             value={field.value} 
                             onChange={field.onChange} 
+                            onChangeText={field.onChange}
                             placeholder="SuperCoolUsername" 
                             label="Username" 
                             error={fieldState.error?.message}
@@ -86,6 +87,7 @@ export function RegisterFormStepOne(){
                         return(
                             <Input.Password value={field.value} 
                             onChange={field.onChange} 
+                            onChangeText={field.onChange}
                             placeholder="Password" 
                             label="Password" 
                             error={fieldState.error?.message}
@@ -107,6 +109,7 @@ export function RegisterFormStepOne(){
                     return(
                         <Input.Password value={field.value} 
                         onChange={field.onChange} 
+                        onChangeText={field.onChange}
                         placeholder="Re-type Password" 
                         label="Re-type Password" 
                         error={fieldState.error?.message}
@@ -117,7 +120,7 @@ export function RegisterFormStepOne(){
             </View>
 
             <View style={styles.buttonForm}>
-                <Button onPress={()=>{router.push("/register-form-step-two")}} label="Continue..."/>
+                <Button onPress={handleSubmit(onSubmit)} label="Continue..."/>
             </View>
 
         </View>

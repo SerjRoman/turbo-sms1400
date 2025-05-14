@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form"
 import { ILogin } from "../../types"
-import { View } from "react-native"
+import { Modal, View } from "react-native"
 import { Input } from "../../../../shared/ui/input"
 import { Button } from "../../../../shared/ui/button"
 import { UserIcon } from "../../../../shared/ui/icons"
@@ -46,7 +46,6 @@ export function LoginForm(){
                         )
                     }
                 }/>
-
                 <Controller control={control} name='password'
                 rules={{
                     required:{

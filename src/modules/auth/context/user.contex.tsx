@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { IUser } from "../types";
 
 interface IUserContext{
@@ -11,14 +11,30 @@ interface IUserContext{
 
 const UserContext = createContext<null | IUserContext>(null)
 
-// useUserContext
-// UserProvider
+export function useUserContext(){ 
+    return useContext(UserContext)
+}
 
-// Для реализации функции login и register создаем хук useAuth(либо useLogin, useRegister)
+interface IUserContextProviderProps{
+    children?: ReactNode
+}
+
+export function UserContextProvider(props: IUserContextProviderProps){
+    const [user, setUser] = useState<IUser | null>(null)
+    const [token, setToken] = useState<string | null>(null)
+
+    return <UserContext.Provider
+        value={{
+            user: user,
+            token: token,
+            isAuthenticated: () => false,
+            setUser: setUser,
+            setToken: setToken,
+        }}>
+
+        {props.children}
+    </UserContext.Provider> 
+}
 
 
 
-// Модальное окно можно реализовать двумя вариантамм
-// 1. Создаете новое окно(у вас создается новая ссылка) и используете свойство presentation (у Screen или Stack)
-// 2. Без отдельного окна( не участвует в навигации Expo Router ) и реализуете с помощью бибилотеки react-native-modal (либо стандартная реализация с помощью react-native и компонента Modal)
-// react-native-modal https://www.npmjs.com/package/react-native-modal

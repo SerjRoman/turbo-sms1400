@@ -8,6 +8,7 @@ import { COLORS } from "../../../../shared/ui/colors";
 import { launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker'
 import { useState } from "react";
 import { useLocalSearchParams } from "expo-router";
+import SearchIcon from "../../../../shared/ui/icons/search-icon";
 
 const defaultImage = require("../../../../../assets/boy.png");
 
@@ -65,7 +66,7 @@ export function RegisterFormStepTwo() {
                         value: 3,
                         message: "Name must be at least 3 characters long",
                     },
-                }}
+                }} 
                 render={({ field, fieldState }) => {
                     return (
                         <Input

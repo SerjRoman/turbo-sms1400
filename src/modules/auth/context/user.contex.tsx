@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { IUser } from "../types";
 
 interface IUserContext{
@@ -9,10 +9,51 @@ interface IUserContext{
     setToken: (value: string) => void
 }
 
-const UserContext = createContext<null | IUserContext>(null)
+const initialValue: IUserContext = {
+    user: null,
+    token:  null,
+    isAuthenticated: () => false,
+    setUser: () => {},
+    setToken: () => {},
+}
+
+const UserContext = createContext<IUserContext>(initialValue)
 
 // useUserContext
+export function useUserContext(){
+    return useContext(UserContext)
+}
+
+
+
 // UserProvider
+
+export function UserContextProvider(children: ReactNode){
+    const [user, setUser] = useState<IUser | null>(null)
+    const [token, setToken] = useState<string | null>(null)
+
+    function isAuthenticated(){
+        if (user === null) return false
+        return true
+    }
+
+
+    return (
+        <UserContext.Provider
+        value={{
+            user,
+            token,
+            isAuthenticated,
+            setUser,
+            setToken,
+        }}
+        >
+        {children}
+        </UserContext.Provider>
+    );
+    
+}
+
 
 // Для реализации функции login и register создаем хук useAuth(либо useLogin, useRegister)
 

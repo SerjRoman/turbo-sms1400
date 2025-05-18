@@ -3,4 +3,4 @@ export {UserIcon} from "./user-icon"
 export {EyeIcon} from "./eye-icon"
 export {EyeSlashIcon} from "./eye-slash-icon"
 export { ErrorIcon } from "./error-icon"
-export { MailIcon } from './mail-icon'
+export { EmailIcon } from "./email-icon"

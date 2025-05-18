@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import { LogoImage } from "../../../../shared/ui/images";
 import { styles } from "./welcome-block.styles";
+import { COLORS } from "../../../../shared/ui/colors";
 
 export function WelcomeBlock(){
     return (

@@ -1,3 +1,5 @@
 export { WelcomeBlock } from './welcome-block'
 export { LoginForm } from './login-form'
-export { RegisterForm } from './register-form'
+export { RegisterFormStepOne } from './register-form-step-one'
+export { RegisterFormStepTwo } from './register-form-step-two'
+export { FooterBlock } from './footer-block'

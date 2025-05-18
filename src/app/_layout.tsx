@@ -6,7 +6,7 @@ export default function RootLayout(){
         <Providers>
             <Stack>
                 <Stack.Screen name="index" options={{
-                    headerShown: false
+                    headerShown: false, // <HeaderComponent/>
                 }}/>
 
                 <Stack.Screen name="(auth)" options={{

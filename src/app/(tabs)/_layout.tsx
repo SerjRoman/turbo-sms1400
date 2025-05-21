@@ -1,11 +1,14 @@
 import { Tabs } from "expo-router";
-import { Header } from "../../shared/ui/header";
 import {
 	ChatIcon,
 	FooterProfile,
 	FooterSettings,
 	PeopleIcon,
 } from "../../shared/ui/icons";
+import { HeaderContacts } from "../../modules/contacts/ui/header/headerContacts";
+import { HeaderProfile } from "../../modules/profile/ui";
+import { HeaderChats } from "../../modules/chats/ui/header/headerChats";
+import { HeaderSettings } from "../../modules/settings/ui";
 
 export default function TabsLayout() {
 	return (
@@ -14,6 +17,8 @@ export default function TabsLayout() {
 				name="profile"
 				options={{
 					tabBarIcon: () => <PeopleIcon />,
+					header: () => <HeaderProfile />,
+					headerStatusBarHeight: 10,
 				}}
 			/>
 
@@ -21,7 +26,8 @@ export default function TabsLayout() {
 				name="chats"
 				options={{
 					tabBarIcon: () => <ChatIcon />,
-					header: () => <Header title="Chats" />,
+					header: () => <HeaderChats />,
+					headerStatusBarHeight: 10,
 				}}
 			/>
 
@@ -29,6 +35,8 @@ export default function TabsLayout() {
 				name="contacts"
 				options={{
 					tabBarIcon: () => <FooterProfile />,
+					header: () => <HeaderContacts />,
+					headerStatusBarHeight: 10,
 				}}
 			/>
 
@@ -36,6 +44,8 @@ export default function TabsLayout() {
 				name="settings"
 				options={{
 					tabBarIcon: () => <FooterSettings />,
+					header: () => <HeaderSettings />,
+					headerStatusBarHeight: 10,
 				}}
 			/>
 		</Tabs>

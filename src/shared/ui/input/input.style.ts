@@ -3,7 +3,7 @@ import { COLORS } from '../colors'
 
 export const styles = StyleSheet.create({
     inputContainer: {
-        padding: 16,
+        padding: 8,
         
     },
     label: {
@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         fontSize: 16,
         backgroundColor: COLORS.bisquePrimary,
+
     },
     inputWithLeftIcon: {
         paddingLeft: 60, 

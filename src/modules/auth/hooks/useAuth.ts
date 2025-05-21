@@ -5,9 +5,9 @@ import { GET } from '../../../shared/api/get';
 import { POST } from '../../../shared/api/post';
 
 type AuthError = {
-  message: string;
-  code?: number;
-  type?: 'EXISTS' | 'NOT_FOUND' | 'UNAUTHORIZED' | 'VALIDATION' | 'SERVER';
+    message: string;
+    code?: number;
+    type?: 'EXISTS' | 'NOT_FOUND' | 'UNAUTHORIZED' | 'VALIDATION' | 'SERVER';
 };
 
 export function useAuth() {
@@ -20,34 +20,34 @@ export function useAuth() {
         setError(null);
 
         try {
-        const result = await GET<IUser>({
-            endpoint: 'http://localhost:8000/api/users/me',
-            token: token
-        });
-
-        if (result.status === 'error') {
-            handleBackendError({
-                message: result.message ?? 'Unknown error',
-                code: result.code
+            const result = await GET<IUser>({
+                endpoint: 'http://localhost:8000/api/users/me',
+                token: token
             });
-            return result;
-        }
 
-        setUser(result.data);
-        return result;
+            if (result.status === 'error') {
+                handleBackendError({
+                    message: result.message ?? 'Unknown error',
+                    code: result.code
+                });
+                return result;
+            }
+
+            setUser(result.data);
+            return result;
         } catch (error) {
-        const networkError: AuthError = {
-            message: 'Network error',
-            type: 'SERVER'
-        };
-        setError(networkError);
-        return {
-            status: 'error',
-            message: networkError.message,
-            code: 500
-        };
+            const networkError: AuthError = {
+                message: 'Network error',
+                type: 'SERVER'
+            };
+            setError(networkError);
+            return {
+                status: 'error',
+                message: networkError.message,
+                code: 500
+            };
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -56,34 +56,34 @@ export function useAuth() {
         setError(null);
 
         try {
-        const result = await POST<string>({
-            endpoint: 'http://localhost:8000/api/users/login',
-            body: { email, password }
-        });
-
-        if (result.status === 'error') {
-            handleBackendError({
-                message: result.message ?? 'Unknown error',
-                code: result.code
+            const result = await POST<string>({
+                endpoint: 'http://localhost:8000/api/users/login',
+                body: { email, password }
             });
-            return result;
-        }
 
-        await getMe(result.data);
-        return result;
+            if (result.status === 'error') {
+                handleBackendError({
+                    message: result.message ?? 'Unknown error',
+                    code: result.code
+                });
+                return result;
+            }
+
+            await getMe(result.data);
+            return result;
         } catch (error) {
-        const networkError: AuthError = {
-            message: 'Network error',
-            type: 'SERVER'
-        };
-        setError(networkError);
-        return {
-            status: 'error',
-            message: networkError.message,
-            code: 500
-        };
+            const networkError: AuthError = {
+                message: 'Network error',
+                type: 'SERVER'
+            };
+            setError(networkError);
+            return {
+                status: 'error',
+                message: networkError.message,
+                code: 500
+            };
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -97,61 +97,61 @@ export function useAuth() {
         setError(null);
 
         try {
-        const result = await POST<string>({
-            endpoint: 'http://localhost:8000/api/users/register',
-            body: { email, username, image, password }
-        });
-
-        if (result.status === 'error') {
-            handleBackendError({
-                message: result.message ?? 'Unknown error',
-                code: result.code
+            const result = await POST<string>({
+                endpoint: 'http://localhost:8000/api/users/register',
+                body: { email, username, image, password }
             });
-            return result;
-        }
 
-        await getMe(result.data);
-        return result;
+            if (result.status === 'error') {
+                handleBackendError({
+                    message: result.message ?? 'Unknown error',
+                    code: result.code
+                });
+                return result;
+            }
+
+            await getMe(result.data);
+            return result;
         } catch (error) {
-        const networkError: AuthError = {
-            message: 'Network error',
-            type: 'SERVER'
-        };
-        setError(networkError);
-        return {
-            status: 'error',
-            message: networkError.message,
-            code: 500
-        };
+            const networkError: AuthError = {
+                message: 'Network error',
+                type: 'SERVER'
+            };
+            setError(networkError);
+            return {
+                status: 'error',
+                message: networkError.message,
+                code: 500
+            };
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
     function handleBackendError(result: { message: string; code?: number }) {
         let errorType: AuthError['type'];
-        
+
         switch (result.code) {
-        case 409:
-            errorType = 'EXISTS';
-            break;
-        case 404:
-            errorType = 'NOT_FOUND';
-            break;
-        case 401:
-            errorType = 'UNAUTHORIZED';
-            break;
-        case 422:
-            errorType = 'VALIDATION';
-            break;
-        default:
-            errorType = 'SERVER';
+            case 409:
+                errorType = 'EXISTS';
+                break;
+            case 404:
+                errorType = 'NOT_FOUND';
+                break;
+            case 401:
+                errorType = 'UNAUTHORIZED';
+                break;
+            case 422:
+                errorType = 'VALIDATION';
+                break;
+            default:
+                errorType = 'SERVER';
         }
 
         const authError: AuthError = {
-        message: result.message,
-        code: result.code,
-        type: errorType
+            message: result.message,
+            code: result.code,
+            type: errorType
         };
 
         setError(authError);
@@ -160,13 +160,13 @@ export function useAuth() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-        getMe(token);
+            getMe(token);
         }
     }, []);
 
-    return { 
-        login, 
-        register, 
-        getMe, 
+    return {
+        login,
+        register,
+        getMe,
     };
 }

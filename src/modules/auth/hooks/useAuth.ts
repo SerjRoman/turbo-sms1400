@@ -11,6 +11,7 @@ type AuthError = {
 };
 
 export function useAuth() {
+    // Fix must use context
     const [user, setUser] = useState<IUser | null>(null);
     const [error, setError] = useState<AuthError | null>(null);
     const [isLoading, setIsLoading] = useState(false);

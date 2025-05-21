@@ -15,7 +15,7 @@ export async function POST<T>(params: IPostRequestParams): Promise<Result<T>> {
         requestHeaders.set("Authorization", `Bearer ${token}`)
     }
 	try{
-		const response = await fetch(endpoint, {
+		const response = await fetch(`${BASE_URL}/${endpoint}`, {
 			headers: requestHeaders,
             body: JSON.stringify(body),
             method: "POST"

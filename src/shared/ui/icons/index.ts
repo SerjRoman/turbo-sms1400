@@ -1,10 +1,12 @@
-export {KeyIcon} from "./key-icon"
-export {UserIcon} from "./user-icon"
-export {EyeIcon} from "./eye-icon"
-export {EyeSlashIcon} from "./eye-slash-icon"
-export { ErrorIcon } from "./error-icon"
-export { EmailIcon } from "./email-icon"
-export { PeopleIcon } from "./people-icon"
-export { ChatIcon } from "./chat-icon"
-export { FooterProfile } from "./footer-profile"
-export { FooterSettings } from "./footer-settings"
+export { SearchIcon } from "./search-icon";
+export { PlusIcon } from "./plus-icon";
+export { KeyIcon } from "./key-icon";
+export { UserIcon } from "./user-icon";
+export { EyeIcon } from "./eye-icon";
+export { EyeSlashIcon } from "./eye-slash-icon";
+export { ErrorIcon } from "./error-icon";
+export { EmailIcon } from "./email-icon";
+export { PeopleIcon } from "./people-icon";
+export { ChatIcon } from "./chat-icon";
+export { FooterProfile } from "./footer-profile";
+export { FooterSettings } from "./footer-settings";

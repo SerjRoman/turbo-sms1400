@@ -1,4 +1,5 @@
 import { Result } from "../types/result";
+import { BASE_URL } from "../constants";
 
 interface IGetRequestParams {
 	endpoint: string;
@@ -13,7 +14,7 @@ export async function GET<T>(params: IGetRequestParams): Promise<Result<T>> {
         requestHeaders.set("Authorization", `Bearer ${token}`)
     }
 	try{
-		const response = await fetch(endpoint, {
+		const response = await fetch(`${BASE_URL}/${endpoint}`, {
 			headers: requestHeaders
 		})
         const responseData: Result<T> = await response.json()

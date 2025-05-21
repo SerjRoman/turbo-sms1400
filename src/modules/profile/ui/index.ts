@@ -1,1 +1,1 @@
-export { HeaderProfile } from "./header/headerProfile";
+export { HeaderProfile } from "./header/header";

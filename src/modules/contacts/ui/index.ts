@@ -1,1 +1,1 @@
-export { HeaderContacts } from "./header/headerContacts";
+export { HeaderContacts } from "./header/header";

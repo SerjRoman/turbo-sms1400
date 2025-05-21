@@ -1,1 +1,1 @@
-export { HeaderSettings } from "./header/headerSettings";
+export { HeaderSettings } from "./header/header";

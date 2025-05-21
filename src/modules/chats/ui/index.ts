@@ -1,1 +1,1 @@
-export { HeaderChats } from "./header/headerChats"
+export { HeaderChats } from "./header/header"

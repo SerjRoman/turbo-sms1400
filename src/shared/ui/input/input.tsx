@@ -82,4 +82,3 @@ function Password(props: IInputPasswordProps) {
 }
 // Input - это функция(но в JS функции = объекты), поэтому можно создать новое свойство Password, значение которого является компонент Password
 Input.Password = Password
-

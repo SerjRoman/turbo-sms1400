@@ -10,3 +10,4 @@ export { PeopleIcon } from "./people-icon";
 export { ChatIcon } from "./chat-icon";
 export { FooterProfile } from "./footer-profile";
 export { FooterSettings } from "./footer-settings";
+export { BackIcon } from "./back-icon"

@@ -1,6 +1,8 @@
-import {View, Text} from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 import {styles} from './header.styles'
 import { IHeaderProps } from './header.types'
+import { BackIcon, PlusIcon } from '../icons'
+import { COLORS } from '../colors'
 
 export function Header(props: IHeaderProps){
     const {title, headerLeft, headerRight, headerBottom} = props
@@ -13,5 +15,26 @@ export function Header(props: IHeaderProps){
             </View>
             {headerBottom && <View style={styles.headerBottom}>{headerBottom}</View>}
         </View>
+    )
+}
+
+export function HeaderSettings(props: IHeaderProps) {
+    const {title} = props
+    return (
+        <Header
+            title="Settings"
+            headerLeft={
+                <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+                    <BackIcon style={{ width: 16, height: 16, }} fill={COLORS.brownPrimary} />
+                    <Text style={{color: COLORS.brownPrimary, fontSize: 22, fontWeight: 400}}>Back</Text>
+                </TouchableOpacity>
+            }
+            headerRight={
+                <TouchableOpacity style={{ width: 40, }}>
+                    <PlusIcon style={{ width: 40, height: 23.33, display: "none"}} />
+                </TouchableOpacity>
+            }
+        />
+
     )
 }

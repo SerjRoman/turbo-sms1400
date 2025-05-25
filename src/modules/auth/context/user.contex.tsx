@@ -11,8 +11,12 @@ interface IUserContext{
 
 const UserContext = createContext<null | IUserContext>(null)
 
-export function useUserContext(){ 
-    return useContext(UserContext)
+export function useUserContext(){
+    const ctx = useContext(UserContext)
+    if (!ctx){
+        throw Error("Context is not provider")
+    }
+    return ctx
 }
 
 interface IUserContextProviderProps{

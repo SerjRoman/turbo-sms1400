@@ -1,3 +1,4 @@
+import { BASE_URL } from "../constants";
 import { Result } from "../types/result";
 
 interface IPostRequestParams {

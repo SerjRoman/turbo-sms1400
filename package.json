@@ -9,8 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@types/react": "~19.0.10",
     "@types/react-native": "^0.73.0",
+=======
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "@types/react": "~19.0.10",
+>>>>>>> 9077ee6307b54c97f70072c1feecbb45f3c6850a
     "expo": "^53.0.9",
     "expo-constants": "~17.1.6",
     "expo-image-picker": "~16.1.4",
@@ -21,14 +26,29 @@
     "react-native": "0.79.2",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.10.0",
+<<<<<<< HEAD
     "react-native-svg": "15.11.2",
     "expo-router": "~5.0.7",
     "react-dom": "19.0.0",
     "react-native-web": "^0.20.0"
+=======
+    "react-native-svg": "15.11.2"
+>>>>>>> 9077ee6307b54c97f70072c1feecbb45f3c6850a
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SerjRoman/turbo-sms1400.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SerjRoman/turbo-sms1400/issues"
+  },
+  "homepage": "https://github.com/SerjRoman/turbo-sms1400#readme",
+  "description": ""
 }

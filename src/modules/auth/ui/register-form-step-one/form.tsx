@@ -17,7 +17,7 @@ export function RegisterFormStepOne(){
         // Из data берется confirmPassword И все что осталось кроме confirmPassword записывается в otherData
         const { confirmPassword, ...otherData } = data
         router.push({
-            pathname: "/register/step-two",
+            pathname: "register/step-two",
             params: otherData,
         })
     }
@@ -113,7 +113,7 @@ export function RegisterFormStepOne(){
 
                     <Controller
                     control={control}
-                    name="password"
+                    name="confirmPassword"
                     rules={{
                         required:{
                             value:true,

@@ -28,7 +28,7 @@ export function useAuth() {
 
 		try {
 			const result = await GET<IUser>({
-				endpoint: "http://localhost:8000/api/users/me",
+				endpoint: "users/me",
 				token: token,
 			});
 
@@ -67,7 +67,7 @@ export function useAuth() {
 
 		try {
 			const result = await POST<string>({
-				endpoint: "http://localhost:8000/api/users/login",
+				endpoint: "users/login",
 				body: { email, password },
 			});
 
@@ -100,15 +100,17 @@ export function useAuth() {
 		email: string,
 		username: string,
 		image: string,
-		password: string
+		password: string,
+		name: string,
+		surname: string
 	): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
 		try {
 			const result = await POST<string>({
-				endpoint: "http://localhost:8000/api/users/register",
-				body: { email, username, image, password },
+				endpoint: "users/register",
+				body: { avatar: image, username, email, password, name, surname },
 			});
 
 			if (result.status === "error") {

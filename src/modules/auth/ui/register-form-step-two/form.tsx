@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { UserIcon } from "../../../../shared/ui/icons";
+import { SearchIcon, UserIcon } from "../../../../shared/ui/icons";
 import { Controller, useForm } from "react-hook-form";
 import { IRegisterStepTwo } from "../../types/reg";
 import { Input } from "../../../../shared/ui/input";
@@ -7,8 +7,9 @@ import { Button } from "../../../../shared/ui/button";
 import { COLORS } from "../../../../shared/ui/colors";
 import { launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker'
 import { useState } from "react";
-import { useLocalSearchParams } from "expo-router";
-import SearchIcon from "../../../../shared/ui/icons/search-icon";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useAuth } from "../../hooks/useAuth";
+// import SearchIcon from "../../../../shared/ui/icons/search-icon";
 
 const defaultImage = require("../../../../../assets/boy.png");
 
@@ -20,13 +21,17 @@ const defaultImage = require("../../../../../assets/boy.png");
 
 export function RegisterFormStepTwo() {
     const { control, handleSubmit } = useForm<IRegisterStepTwo>()
+    const { register } = useAuth()
     const [image, setImage] = useState<string>("")
+    const router = useRouter()
     // useLocalSearchParams - хук який витягує всі параметри, як динамічні так і query параметри
     const params = useLocalSearchParams<{username: string, email: string, password: string}>()
 
-    function onSubmit(data: IRegisterStepTwo) {
-        console.log(data)
-        console.log(params)
+    async function onSubmit(data: IRegisterStepTwo) {
+        // console.log(data)
+        // console.log(params)
+        await register(params.email, params.username, image, params.password, data.name, data.surname)
+        router.push('chats')
     }
 
     async function onSearch() {

@@ -3,14 +3,22 @@ import { Header } from "../../../../shared/ui/header";
 import { PlusIcon, SearchIcon } from "../../../../shared/ui/icons/";
 import { LogoImage } from "../../../../shared/ui/images";
 import { Input } from "../../../../shared/ui/input";
+import { useRouter } from "expo-router";
 
 export function HeaderChats() {
+
+	const router = useRouter()
+
+	function pressAddContact(){
+		router.push('modals/create-contact-step-one')
+	}
+
 	return (
 		<Header
 			title="Chats"
 			headerLeft={<LogoImage style={{ width: 40, height: 40 }} />}
 			headerRight={
-				<TouchableOpacity>
+				<TouchableOpacity onPress={()=>pressAddContact()}>
 					<PlusIcon style={{ width: 23.33, height: 23.33 }} />
 				</TouchableOpacity>
 			}

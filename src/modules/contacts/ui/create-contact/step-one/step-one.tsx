@@ -1,9 +1,10 @@
-import { TouchableOpacity, View, Image, Text, Button } from "react-native";
+import { View, Image, Text, Button } from "react-native";
 import { Input } from "../../../../../shared/ui/input";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { GET } from "../../../../../shared/api/get";
 import { IUser } from "../../../../auth/types";
+import { SearchIcon } from "../../../../../shared/ui/icons";
+import { styles } from "./step-one.styles";
 
 export function StepOne() {
 	const [image, setImage] = useState<string>("");
@@ -29,12 +30,10 @@ export function StepOne() {
 			}
 			setFoundUser(response.data);
 		}
-		// setTimeout(()=> {
-		//     const response = await GET()
-		// }, 500)
+		getUser();
 	}, [value]);
 	return (
-		<View>
+		<View style={styles.container}>
 			<Input
 				label="Username"
 				placeholder="Username"
@@ -42,20 +41,22 @@ export function StepOne() {
 				onChangeText={(text) => {
 					setValue(text);
 				}}
+				style={styles.searchUser}
+				leftIcon={<SearchIcon width={24} height={24} />}
 			/>
 			{foundUser ? (
-				<View>
+				<View style={styles.userContainer}>
 					<Image
 						source={
 							{ uri: foundUser.avatar }
 							// : require("../../../../shared/ui/images/boy.png") //antoshka
 						}
-						style={{}}
+						style={styles.userAvatar}
 					/>
-					<Text>Username</Text>
+					<Text style={styles.userText}>{foundUser.username}</Text>
 				</View>
 			) : (
-				<Text>{error}</Text>
+				<Text style={styles.userError}>{error}</Text>
 			)}
 
 			<Button disabled={foundUser ? false : true} title="Select"></Button>

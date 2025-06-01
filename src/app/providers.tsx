@@ -1,11 +1,14 @@
 import { ReactNode } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { UserContextProvider } from "../modules/auth/context/user.contex";
 
 export function Providers({children}: {children: ReactNode}){
     return (
-        <SafeAreaProvider>
-            {children}
-        </SafeAreaProvider>
+        <UserContextProvider>
+            <SafeAreaProvider>
+                {children}
+            </SafeAreaProvider>
+        </UserContextProvider>
     )
 }
 

@@ -1,4 +1,5 @@
-export interface IStepTwo {
+export interface IStepTwoForm {
     name: string,
-    surname: string
+    surname: string,
+    avatar: string,
 }

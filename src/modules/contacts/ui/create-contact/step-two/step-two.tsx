@@ -1,51 +1,47 @@
-import { View } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { styles } from "./step-two.styles";
-import { IStepTwo } from "./step-two.type";
+import { IStepTwoForm } from "./step-two.type";
 import { Input } from "../../../../../shared/ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "../../../../../shared/ui/button";
 import { POST } from "../../../../../shared/api/post";
 import { useLocalSearchParams } from "expo-router";
-import { launchImageLibraryAsync, requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { useState } from "react";
+import { useUserContext } from "../../../../auth/context/user.contex";
+import { pickImage } from "../../../../../shared/tools/pick-image";
+import { SearchIcon } from "../../../../../shared/ui/icons";
 
 export function StepTwo() {
-    const [image, setImage] = useState<string | null>(null);
-    const foundUser = useLocalSearchParams<{
+	const foundUser = useLocalSearchParams<{
 		id: string;
 		name: string;
 		surname: string;
+		avatar: string;
 	}>();
+	const { token } = useUserContext();
 
-	const { control, handleSubmit } = useForm({defaultValues: {
-        name: foundUser.name,
-        surname: foundUser.surname
-    }});
-    // ЕЩКЕРЕЕЕЕ
-    
-	// function onSubmit() {
-	//     POST<IStepTwo>()
-	// }
+	const { control, handleSubmit } = useForm<IStepTwoForm>({
+		defaultValues: {
+			name: foundUser.name,
+			surname: foundUser.surname,
+			avatar: foundUser.avatar,
+		},
+	});
 
-    // какащкэ, пасхалко
+	function onSubmit(data: IStepTwoForm) {
+		if (!token) return;
 
-
-    async function Image() {
-		const result = await requestMediaLibraryPermissionsAsync();
-		if (result.status === "granted") {
-			const images = await launchImageLibraryAsync({
-				mediaTypes: "images",
-				allowsEditing: true,
-				allowsMultipleSelection: false,
-				selectionLimit: 1,
-				base64: false,
-			});
-
-			if (images.assets) {
-				setImage(images.assets[0].uri);
-			}
-		}
+		POST({
+			endpoint: "api/contacts/create",
+			body: {
+				contactId: +foundUser.id,
+				avatar: data.avatar,
+				localName: data.name + " " + data.surname,
+			},
+			token: token,
+		});
 	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.inputsContainer}>
@@ -87,7 +83,7 @@ export function StepTwo() {
 					render={({ field, fieldState }) => {
 						return (
 							<Input
-								label="Surname*"
+								label="Surname"
 								placeholder=""
 								value={field.value}
 								onChange={field.onChange}
@@ -97,10 +93,42 @@ export function StepTwo() {
 					}}
 				/>
 			</View>
-			<View>
+			<View style={styles.avatarBlock}>
+				<Controller
+					control={control}
+					name="avatar"
+					render={({ field }) => {
+						return (
+							<TouchableOpacity
+								onPress={async () => {
+									const images = await pickImage({
+										allowsEditing: true,
+										allowsMultipleSelection: false,
+										selectionLimit: 1,
+										base64: true,
+									});
+									if (!images) return;
 
-            </View>
-			<Button onPress={handleSubmit()} label="Save" />
+									const image = images.at(0);
+									if (!image) return;
+
+									const base64 = image.base64;
+									if (!base64) return;
+
+									field.onChange(base64);
+								}}
+							>
+								<Image
+									style={styles.avatar}
+									source={{ uri: field.value }}
+								/>
+								<SearchIcon style={styles.searchIcon}/>
+							</TouchableOpacity>
+						);
+					}}
+				/>
+			</View>
+			<Button onPress={handleSubmit(onSubmit)} label="Save" />
 		</View>
 	);
 }

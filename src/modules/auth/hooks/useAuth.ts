@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { IUser } from "../types";
+import { ILogin, IUser } from "../types";
 import { Result } from "../../../shared/types/result";
 import { GET } from "../../../shared/api/get";
 import { POST } from "../../../shared/api/post";
 import { useUserContext } from "../context/user.contex";
+import { IRegister } from "../types/reg";
 
 type AuthError = {
 	message: string;
@@ -12,7 +13,6 @@ type AuthError = {
 };
 
 export function useAuth() {
-	// Fix must use context
 	const { setUser, setToken, token } = useUserContext();
 
 	const [error, setError] = useState<AuthError | null>(null);
@@ -28,7 +28,7 @@ export function useAuth() {
 
 		try {
 			const result = await GET<IUser>({
-				endpoint: "http://localhost:8000/api/users/me",
+				endpoint: "api/users/me",
 				token: token,
 			});
 
@@ -57,18 +57,16 @@ export function useAuth() {
 			setIsLoading(false);
 		}
 	}
-
 	async function login(
-		email: string,
-		password: string
+		credentials: ILogin
 	): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
 		try {
 			const result = await POST<string>({
-				endpoint: "http://localhost:8000/api/users/login",
-				body: { email, password },
+				endpoint: "api/users/login",
+				body: credentials,
 			});
 
 			if (result.status === "error") {
@@ -97,18 +95,15 @@ export function useAuth() {
 	}
 
 	async function register(
-		email: string,
-		username: string,
-		image: string,
-		password: string
+		credentials: IRegister
 	): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
 		try {
 			const result = await POST<string>({
-				endpoint: "http://localhost:8000/api/users/register",
-				body: { email, username, image, password },
+				endpoint: "api/users/register",
+				body: credentials,
 			});
 
 			if (result.status === "error") {

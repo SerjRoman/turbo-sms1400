@@ -6,5 +6,21 @@ export const styles = StyleSheet.create({
     },
     inputsContainer: {
         
+    },
+    avatarBlock: {
+        width: 200,
+        height: 200,
+    },
+    avatar: {
+        width: 34,
+        height: 34,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    searchIcon: {
+        width: 34,
+        height: 34,
+        alignItems: "center",
+        justifyContent: "center"
     }
 })

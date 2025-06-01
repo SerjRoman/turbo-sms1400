@@ -3,7 +3,9 @@ import { COLORS } from "../../../../shared/ui/colors";
 
 export const styles = StyleSheet.create({
     container: {
-        alignItems: 'center'
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: "center"
     },
     image:{
         height: 100,

@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: COLORS.black, 
         fontWeight: '400',
+        textAlign: "center"
     },
     footerLink: {
         fontSize: 14,

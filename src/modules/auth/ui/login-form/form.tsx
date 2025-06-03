@@ -44,6 +44,7 @@ export function LoginForm() {
 							<Input
 								value={field.value}
 								onChange={field.onChange}
+								onChangeText={field.onChange}
 								placeholder="SuperCoolEmail@gmail.com"
 								label="email"
 								error={fieldState.error?.message}
@@ -65,6 +66,7 @@ export function LoginForm() {
 						return (
 							<Input.Password
 								value={field.value}
+								onChangeText={field.onChange}
 								onChange={field.onChange}
 								placeholder="password"
 								label="password"

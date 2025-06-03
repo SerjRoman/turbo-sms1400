@@ -5,6 +5,7 @@ import { GET } from "../../../shared/api/get";
 import { POST } from "../../../shared/api/post";
 import { useUserContext } from "../context/user.contex";
 import { IRegister } from "../types/reg";
+import { useRouter } from "expo-router";
 
 type AuthError = {
 	message: string;
@@ -13,8 +14,8 @@ type AuthError = {
 };
 
 export function useAuth() {
-	const { setUser, setToken, token } = useUserContext();
-
+	const { user, setUser, setToken, token } = useUserContext();
+	const router = useRouter();
 	const [error, setError] = useState<AuthError | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -57,9 +58,7 @@ export function useAuth() {
 			setIsLoading(false);
 		}
 	}
-	async function login(
-		credentials: ILogin
-	): Promise<Result<string>> {
+	async function login(credentials: ILogin): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
@@ -94,9 +93,7 @@ export function useAuth() {
 		}
 	}
 
-	async function register(
-		credentials: IRegister
-	): Promise<Result<string>> {
+	async function register(credentials: IRegister): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
@@ -163,6 +160,11 @@ export function useAuth() {
 	useEffect(() => {
 		getMe();
 	}, [token]);
+
+	useEffect(() => {
+		if (!user) return;
+		router.replace("/chats");
+	}, [user]);
 
 	return {
 		login,

@@ -1,12 +1,10 @@
-import { TouchableOpacity, View, Image, Text, Button } from "react-native";
+import { View, Image, Text, Button } from "react-native";
 import { Input } from "../../../../../shared/ui/input";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { GET } from "../../../../../shared/api/get";
 import { IUser } from "../../../../auth/types";
 import { SearchIcon } from "../../../../../shared/ui/icons";
-import { COLORS } from "../../../../../shared/ui/colors";
-import { useRouteInfo, useRouter } from "expo-router/build/hooks";
+import { styles } from "./step-one.styles";
 
 export function StepOne() {
 	const [image, setImage] = useState<string>("");
@@ -37,11 +35,7 @@ export function StepOne() {
 			setFoundUser(response.data);
 			console.log(foundUser)
 		}
-
-		getUser()
-		// setTimeout(()=> {
-		//     const response = await GET()
-		// }, 500)
+		getUser();
 	}, [value]);
 
 	function selectUser(){
@@ -53,7 +47,7 @@ export function StepOne() {
 	}
 
 	return (
-		<View>
+		<View style={styles.container}>
 			<Input
 				label="Username"
 				placeholder="Username"
@@ -62,21 +56,23 @@ export function StepOne() {
 				onChangeText={(text) => {
 					setValue(text);
 				}}
+				style={styles.searchUser}
+				leftIcon={<SearchIcon width={24} height={24} />}
 			/>
 			{foundUser ? (
-				<View>
+				<View style={styles.userContainer}>
 					<Image
 						source={
 							foundUser.avatar ?
 							{ uri: foundUser.avatar }:
 							require("../../../../../shared/ui/images/boy") //antoshka
 						}
-						style={{width: 100, height:100}}
+						style={styles.userAvatar}
 					/>
-					<Text>Username</Text>
+					<Text style={styles.userText}>{foundUser.username}</Text>
 				</View>
 			) : (
-				<Text>{error}</Text>
+				<Text style={styles.userError}>{error}</Text>
 			)}
 
 			<TouchableOpacity onPress={()=>selectUser()} disabled={foundUser ? false : true} style={{backgroundColor: COLORS.grey}} >Select</TouchableOpacity>

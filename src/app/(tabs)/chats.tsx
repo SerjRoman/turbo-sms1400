@@ -1,5 +1,5 @@
 import { StatusBar, Text, View } from 'react-native'
-import { HeaderChats } from '../../modules/chats/ui/header/headerChats'
+// import { HeaderChats } from '../../modules/chats/ui/header/headerChats'
 
 export default function Chats(){
 

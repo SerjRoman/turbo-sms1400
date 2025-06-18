@@ -4,11 +4,11 @@ import { UserContextProvider } from "../modules/auth/context/user.contex";
 
 export function Providers({children}: {children: ReactNode}){
     return (
-        <SafeAreaProvider>
-            <UserContextProvider>
+        <UserContextProvider>
+            <SafeAreaProvider>
                 {children}
-            </UserContextProvider>
-        </SafeAreaProvider>
+            </SafeAreaProvider>
+        </UserContextProvider>
     )
 }
 

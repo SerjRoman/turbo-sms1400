@@ -1,8 +1,8 @@
 import { TouchableOpacity, Text } from "react-native"
 import { Header } from "../../../../shared/ui/header"
-import { PlusIcon } from "../../../../shared/ui/icons"
+import { BackIcon, PlusIcon } from "../../../../shared/ui/icons"
 import { COLORS } from "../../../../shared/ui/colors"
-import BackIcon from "../../../../shared/ui/icons/back-icon"
+// import BackIcon from "../../../../shared/ui/icons/back-icon"
 
 export function HeaderSettings() {
     return (

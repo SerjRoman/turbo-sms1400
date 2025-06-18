@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { IUser } from "../types";
+import { ILogin, IUser } from "../types";
 import { Result } from "../../../shared/types/result";
 import { GET } from "../../../shared/api/get";
 import { POST } from "../../../shared/api/post";
 import { useUserContext } from "../context/user.contex";
+import { IRegister } from "../types/reg";
+import { useRouter } from "expo-router";
 
 type AuthError = {
 	message: string;
@@ -12,9 +14,8 @@ type AuthError = {
 };
 
 export function useAuth() {
-	// Fix must use context
-	const { setUser, setToken, token } = useUserContext();
-
+	const { user, setUser, setToken, token } = useUserContext();
+	const router = useRouter();
 	const [error, setError] = useState<AuthError | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -28,7 +29,7 @@ export function useAuth() {
 
 		try {
 			const result = await GET<IUser>({
-				endpoint: "users/me",
+				endpoint: "api/users/me",
 				token: token,
 			});
 
@@ -57,18 +58,14 @@ export function useAuth() {
 			setIsLoading(false);
 		}
 	}
-
-	async function login(
-		email: string,
-		password: string
-	): Promise<Result<string>> {
+	async function login(credentials: ILogin): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
 		try {
 			const result = await POST<string>({
-				endpoint: "users/login",
-				body: { email, password },
+				endpoint: "api/users/login",
+				body: credentials,
 			});
 
 			if (result.status === "error") {
@@ -96,21 +93,14 @@ export function useAuth() {
 		}
 	}
 
-	async function register(
-		email: string,
-		username: string,
-		image: string,
-		password: string,
-		name: string,
-		surname: string
-	): Promise<Result<string>> {
+	async function register(credentials: IRegister): Promise<Result<string>> {
 		setIsLoading(true);
 		setError(null);
 
 		try {
 			const result = await POST<string>({
-				endpoint: "users/register",
-				body: { avatar: image, username, email, password, name, surname },
+				endpoint: "api/users/register",
+				body: credentials,
 			});
 
 			if (result.status === "error") {
@@ -170,6 +160,11 @@ export function useAuth() {
 	useEffect(() => {
 		getMe();
 	}, [token]);
+
+	useEffect(() => {
+		if (!user) return;
+		router.replace("/chats");
+	}, [user]);
 
 	return {
 		login,

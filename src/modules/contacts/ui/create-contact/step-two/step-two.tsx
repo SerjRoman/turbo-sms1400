@@ -1,65 +1,44 @@
-import { useState } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Image,
-} from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import {
-	launchImageLibraryAsync,
-	requestMediaLibraryPermissionsAsync,
-	MediaTypeOptions,
-} from "expo-image-picker";
-import { useLocalSearchParams } from "expo-router";
-
+import { View, TouchableOpacity, Image } from "react-native";
 import { styles } from "./step-two.styles";
-import { IStepTwo } from "./step-two.type";
+import { IStepTwoForm } from "./step-two.type";
 import { Input } from "../../../../../shared/ui/input";
 import { Button } from "../../../../../shared/ui/button";
 import { POST } from "../../../../../shared/api/post";
+import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
+import { useUserContext } from "../../../../auth/context/user.contex";
+import { pickImage } from "../../../../../shared/tools/pick-image";
 import { SearchIcon } from "../../../../../shared/ui/icons";
 
-// ⚠️ Убедись, что путь верный и файл реально существует
-const defaultImage = require("../../../../../shared/assets/default.png");
-
 export function StepTwo() {
-	const [image, setImage] = useState<string | null>(null);
-
 	const foundUser = useLocalSearchParams<{
 		id: string;
 		name: string;
 		surname: string;
+		avatar: string;
 	}>();
+	const { token } = useUserContext();
 
-	const { control, handleSubmit } = useForm({
+	const { control, handleSubmit } = useForm<IStepTwoForm>({
 		defaultValues: {
 			name: foundUser.name,
 			surname: foundUser.surname,
+			avatar: foundUser.avatar,
 		},
 	});
 
-	async function onSearch() {
-		const result = await requestMediaLibraryPermissionsAsync();
-		if (result.status === "granted") {
-			const images = await launchImageLibraryAsync({
-				mediaTypes: MediaTypeOptions.Images,
-				allowsEditing: true,
-				allowsMultipleSelection: false,
-				selectionLimit: 1,
-				base64: false,
-			});
+	function onSubmit(data: IStepTwoForm) {
+		if (!token) return;
 
-			if (!images.canceled && images.assets && images.assets.length > 0) {
-				setImage(images.assets[0].uri);
-			}
-		}
-	}
-
-	function onSubmit(data: IStepTwo) {
-		console.log("Submitted data:", data);
-		// TODO: отправка данных на сервер
-		// POST<IStepTwo>("/api/step-two", { ...data, image });
+		POST({
+			endpoint: "api/contacts/create",
+			body: {
+				contactId: +foundUser.id,
+				avatar: data.avatar,
+				localName: data.name + " " + data.surname,
+			},
+			token: token,
+		});
 	}
 
 	return (
@@ -95,40 +74,54 @@ export function StepTwo() {
 							message: "Surname must be at most 32 characters long",
 						},
 					}}
-					render={({ field, fieldState }) => (
-						<Input
-							label="Surname*"
-							placeholder=""
-							value={field.value}
-							onChange={field.onChange}
-							error={fieldState.error?.message}
-						/>
-					)}
+					render={({ field, fieldState }) => {
+						return (
+							<Input
+								label="Surname"
+								placeholder=""
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+							/>
+						);
+					}}
 				/>
-
-				<TouchableOpacity onPress={onSearch}>
-					<View style={styles.imageContainer}>
-						<View style={styles.imageWrapper}>
-							<Image
-								source={image ? { uri: image } : defaultImage}
-								style={{
-									width: 75,
-									height: 75,
-									borderRadius: 37.5,
-								}}
-								resizeMode="cover"
-							/>
-							<SearchIcon
-								width={32}
-								height={34}
-								style={styles.searchIcon}
-							/>
-						</View>
-						<Text style={styles.uploadText}>Upload photo</Text>
-					</View>
-				</TouchableOpacity>
 			</View>
+			<View style={styles.avatarBlock}>
+				<Controller
+					control={control}
+					name="avatar"
+					render={({ field }) => {
+						return (
+							<TouchableOpacity
+								onPress={async () => {
+									const images = await pickImage({
+										allowsEditing: true,
+										allowsMultipleSelection: false,
+										selectionLimit: 1,
+										base64: true,
+									});
+									if (!images) return;
 
+									const image = images.at(0);
+									if (!image) return;
+
+									const base64 = image.base64;
+									if (!base64) return;
+
+									field.onChange(base64);
+								}}
+							>
+								<Image
+									style={styles.avatar}
+									source={{ uri: field.value }}
+								/>
+								<SearchIcon style={styles.searchIcon}/>
+							</TouchableOpacity>
+						);
+					}}
+				/>
+			</View>
 			<Button onPress={handleSubmit(onSubmit)} label="Save" />
 		</View>
 	);

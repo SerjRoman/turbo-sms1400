@@ -8,24 +8,20 @@ export const styles = StyleSheet.create({
     inputsContainer: {
         
     },
-    imageContainer: {
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 5,
+    avatarBlock: {
+        width: 200,
+        height: 200,
     },
-    imageWrapper: {
-        position: "relative",
-        width: 75,
-        height: 75,
+    avatar: {
+        width: 34,
+        height: 34,
+        alignItems: "center",
+        justifyContent: "center"
     },
     searchIcon: {
-        position: "absolute",
-        top: 20, 
-        right: 20,
-    },
-    uploadText: {
-        fontSize: 14,
-        color: COLORS.black,
-        fontWeight: "500",
-    },
+        width: 34,
+        height: 34,
+        alignItems: "center",
+        justifyContent: "center"
+    }
 })

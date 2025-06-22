@@ -51,6 +51,8 @@ export function RegisterFormStepOne() {
 									leftIcon={
 										<EmailIcon width={36} height={35} />
 									}
+									autoCapitalize={"none"}
+									autoCorrect={false}
 								/>
 							);
 						}}
@@ -77,6 +79,8 @@ export function RegisterFormStepOne() {
 									leftIcon={
 										<UserIcon width={36} height={35} />
 									}
+									autoCapitalize={"none"}
+									autoCorrect={false}
 								/>
 							);
 						}}
@@ -110,6 +114,8 @@ export function RegisterFormStepOne() {
 									placeholder="Your password"
 									label="Password"
 									error={fieldState.error?.message}
+									autoCapitalize={"none"}
+									autoCorrect={false}
 								/>
 							);
 						}}

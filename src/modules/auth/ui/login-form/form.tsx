@@ -49,6 +49,8 @@ export function LoginForm() {
 								label="email"
 								error={fieldState.error?.message}
 								leftIcon={<UserIcon width={36} height={35} />}
+								autoCapitalize={"none"}
+								autoCorrect={false}
 							/>
 						);
 					}}
@@ -71,6 +73,8 @@ export function LoginForm() {
 								placeholder="password"
 								label="password"
 								error={fieldState.error?.message}
+								autoCapitalize={"none"}
+								autoCorrect={false}
 							/>
 						);
 					}}

@@ -1,17 +1,18 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity, Image, Alert } from "react-native";
 import { styles } from "./step-two.styles";
 import { IStepTwoForm } from "./step-two.type";
 import { Input } from "../../../../../shared/ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "../../../../../shared/ui/button";
 import { POST } from "../../../../../shared/api/post";
-import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useUserContext } from "../../../../auth/context/user.contex";
 import { pickImage } from "../../../../../shared/tools/pick-image";
 import { SearchIcon } from "../../../../../shared/ui/icons";
+import { BASE_IMAGE_URL } from "../../../../../shared/constants";
 
 export function StepTwo() {
+	const router = useRouter()
 	const foundUser = useLocalSearchParams<{
 		id: string;
 		name: string;
@@ -28,18 +29,24 @@ export function StepTwo() {
 		},
 	});
 
-	function onSubmit(data: IStepTwoForm) {
+	async function onSubmit(data: IStepTwoForm) {
 		if (!token) return;
 
-		POST({
+		const response = await POST({
 			endpoint: "api/contacts/create",
 			body: {
-				contactId: +foundUser.id,
+				contactUserId: +foundUser.id,
 				avatar: data.avatar,
 				localName: data.name + " " + data.surname,
 			},
 			token: token,
 		});
+		if (response.status === "error") {
+			Alert.alert(response.message ? response.message : "bad error");
+			console.log(response.message);
+			return;
+		}
+		router.replace("/contacts")
 	}
 
 	return (
@@ -120,9 +127,9 @@ export function StepTwo() {
 							>
 								<Image
 									style={styles.avatar}
-									source={{ uri: field.value }}
+									source={{ uri: `${BASE_IMAGE_URL}${field.value}` }}
 								/>
-								<SearchIcon style={styles.searchIcon}/>
+								<SearchIcon style={styles.searchIcon} />
 							</TouchableOpacity>
 						);
 					}}

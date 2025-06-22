@@ -1,23 +1,41 @@
-import { View, Image, Text, Button } from "react-native";
+import { View, Image, Text } from "react-native";
 import { Input } from "../../../../../shared/ui/input";
 import { useEffect, useState } from "react";
 import { GET } from "../../../../../shared/api/get";
 import { IUser } from "../../../../auth/types";
 import { SearchIcon } from "../../../../../shared/ui/icons";
 import { styles } from "./step-one.styles";
+import { BASE_IMAGE_URL } from "../../../../../shared/constants";
+import { Button } from "../../../../../shared/ui/button";
+import { useRouter } from "expo-router";
 
 export function StepOne() {
-	const [image, setImage] = useState<string>("");
 	const [value, setValue] = useState<string>("");
 	const [foundUser, setFoundUser] = useState<IUser | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
+	const router = useRouter();
+
+	const onPress = () => {
+		router.push({
+			pathname: "/modals/create-contact-step-two",
+			params: {
+				id: foundUser?.id,
+				name: foundUser?.name,
+				surname: foundUser?.surname,
+				avatar: foundUser?.avatar,
+			},
+		});
+	};
 
 	useEffect(() => {
+        if (!value) return
 		async function getUser() {
 			setIsLoading(true);
 			setError(null);
-			const response = await GET<IUser>({ endpoint: `/users/${value}` });
+			const response = await GET<IUser>({
+				endpoint: `api/users/${value}`,
+			});
 			if (response.status === "error") {
 				switch (response.code) {
 					case 404:
@@ -43,14 +61,13 @@ export function StepOne() {
 				}}
 				style={styles.searchUser}
 				leftIcon={<SearchIcon width={24} height={24} />}
+				autoCapitalize={"none"}
+				autoCorrect={false}
 			/>
 			{foundUser ? (
 				<View style={styles.userContainer}>
 					<Image
-						source={
-							{ uri: foundUser.avatar }
-							// : require("../../../../shared/ui/images/boy.png") //antoshka
-						}
+						source={{ uri: `${BASE_IMAGE_URL}${foundUser.avatar}` }}
 						style={styles.userAvatar}
 					/>
 					<Text style={styles.userText}>{foundUser.username}</Text>
@@ -59,7 +76,11 @@ export function StepOne() {
 				<Text style={styles.userError}>{error}</Text>
 			)}
 
-			<Button disabled={foundUser ? false : true} title="Select"></Button>
+			<Button
+				disabled={foundUser ? false : true}
+				label="Select"
+				onPress={onPress}
+			></Button>
 		</View>
 	);
 }

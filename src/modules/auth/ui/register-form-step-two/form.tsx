@@ -69,6 +69,8 @@ export function RegisterFormStepTwo() {
 							onChange={field.onChange}
 							placeholder="Name"
 							error={fieldState.error?.message}
+							autoCapitalize={"none"}
+							autoCorrect={false}
 						/>
 					);
 				}}
@@ -95,6 +97,8 @@ export function RegisterFormStepTwo() {
 							onChangeText={field.onChange}
 							placeholder="Surname"
 							error={fieldState.error?.message}
+							autoCapitalize={"none"}
+							autoCorrect={false}
 						/>
 					);
 				}}
